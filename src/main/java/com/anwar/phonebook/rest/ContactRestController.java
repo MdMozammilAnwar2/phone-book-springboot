@@ -3,9 +3,13 @@
  */
 package com.anwar.phonebook.rest;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -35,10 +39,12 @@ public class ContactRestController {
 	}
 	
 	@PostMapping("/save")
-	public String saveContact(@RequestBody ContactForm form) {
+	public HashMap<String, Object> saveContact(@RequestBody ContactForm form) {
 		System.out.println("data coming to controller>>>"+form);
 		String saveContact = service.saveContact(form);
-		return saveContact;
+		 HashMap<String, Object> map = new HashMap<>();
+		 map.put("result", "SUCCESS");
+		 return map;
 	}
 	@GetMapping("/contacts")
 	public List<ContactForm> viewAllContacts(){
